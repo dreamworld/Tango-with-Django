@@ -1,0 +1,30 @@
+{% extends 'rango/base.html' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron">
+	<div class="container">
+        <form class="form-signin col-xs-6" role="form" id="login_form" method="post" action="/rango/login/">
+         <h2 class="form-signin-heading">Login to Rango</h2>
+            {% csrf_token %}
+            
+			{% if bad_details %}
+				<p><strong>Your username and/or password were incorrect!</strong></p>
+			{% elif disabled_account %}
+				<p><strong>Your Rango account is currently disabled; we can't log you in!</strong></p>
+			{% endif %}
+        
+            <div class="form-group">
+            <label for="inputUsername">Username</label> 
+            <input class="form-control" autofocus="" required="" placeholder="Username" type="text" id="inputUsername" name="username" value="" size="50" />
+            </div>
+            <div class="form-group">
+            <label for="inputPassword">Password</lable>
+            <input class="form-control" required="" placeholder="Password" type="password" name="password" value="" size="50" />
+			</div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"/>Login</button>
+        </form>
+    </div>
+</div>
+ {% endblock %}

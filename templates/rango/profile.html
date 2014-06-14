@@ -1,0 +1,26 @@
+{% extends 'rango/base.html' %}
+{% load static %}
+
+{% block title %}Profile{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron">
+            {% if user.is_authenticated %}
+            	<h1>{{ user.username }}</h1>
+            	<dl class="dl-horizontal">
+				  <dt>Email</dt><dd>{{ user.email }}</dd>
+				  {% if user.website %}
+				  	<dt>Website</dt><dd>{{ user.website }}</dd>
+				  {% endif %}
+				  
+				  {% if user.picture %}
+				  	<dt>Picture</dt><dd><img src="{{ user.picture.url }}"></img></dd>
+				  {% endif %}
+				</dl>
+            	
+            
+			{% else %}
+            	<h1>No profile available</h1>               
+            {% endif %}
+</div>
+{% endblock %}

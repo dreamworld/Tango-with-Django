@@ -1,0 +1,38 @@
+
+<div class="jumbotron">
+
+    	<div class="container">
+        <form class="form-inline" role="form" id="user_form" method="post" action="/rango/category/{{category_name_url}}/">
+        	<h2>Search with Rango</h2>
+            {% csrf_token %}
+            <!-- Display the search form elements here -->
+            <div class="form-group">
+            <input class="form-control" type="text" size="50" name="query" value="{{ category_name }}" id="query" />
+            </div>
+            <button class="btn btn-success" type="submit"/>Search</button>
+            <br />
+        </form>
+		</div>
+        
+        
+        {% if search_result_list %}
+        <div class="container">
+        <!-- Display search results in an ordered list -->
+        
+            <ol>
+            {% for result in search_result_list %}
+                <li>
+                    <strong><a href="{{ result.link }}">{{ result.title }}</a></strong>
+                    {% if user.is_authenticated %}
+			        	<button data-catid="{{category.pk}}" data-title="{{ result.title }}" data-url="{{ result.link }}" class="rango-add btn btn-xs btn-info" type="button">Add</button>
+					{% endif %}
+					<br />
+                    <em>{{ result.summary }}</em>
+                    
+                </li>
+            {% endfor %}
+            </ol>
+        </div>
+        {% endif %}
+		
+</div>
